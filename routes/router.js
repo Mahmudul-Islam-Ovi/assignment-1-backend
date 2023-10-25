@@ -2,7 +2,7 @@ const router = require("express").Router();
 const nodemailer = require("nodemailer");
 
 router.post("/api/contact", (req, res) => {
-  const { name, email, message } = req.body;
+  const { name, email, message, phone } = req.body;
 
   try {
     const transporter = nodemailer.createTransport({
@@ -17,6 +17,7 @@ router.post("/api/contact", (req, res) => {
       to: email,
       subject: `Message from ${name}`,
       text: message,
+      phone: phone,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
